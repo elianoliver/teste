@@ -1,0 +1,30 @@
+### BUSCAR TODOS OS USUÁRIOS
+GET http://127.0.0.1:3000/tasks HTTP/1.1
+
+### BUSCAR UM USUÁRIO
+GET http://127.0.0.1:3000/tasks/10 HTTP/1.1
+
+### 
+POST http://127.0.0.1:3000/tasks HTTP/1.1
+content-type: application/json
+
+{
+  "nome": "Elian",
+  "email":  "elianoliveira234@gmail.com",
+  "senha": "123456"
+}
+
+###
+
+PATCH http://127.0.0.1:3000/item/1 HTTP/1.1
+content-type: application/json
+
+{
+  "text": "ir para a escola de novo!",
+  "date": 123,
+  "not-permited-column": ""
+}
+
+###
+
+DELETE http://127.0.0.1:3000/item/2 HTTP/1.1
