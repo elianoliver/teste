@@ -1,122 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulário de Tarefas</title>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formulário de Tarefas</title>
-</head>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
 
-<body>
-  <h1>Formulário de Tarefas</h1>
+      body > div {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+      }
 
-  <form id="form-api">
-    <label for="userId">ID do Usuário</label>
-    <input type="text" name="userId" id="userId" placeholder="Digite o ID do usuário">
+      #form-api {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 300px;
+      }
 
-    <label for="username">Nome de Usuário</label>
-    <input type="text" name="username" id="username" placeholder="Digite o nome de usuário">
+      h1 {
+        text-align: center;
+        color: #333;
+      }
 
-    <label for="password">Senha</label>
-    <input type="password" name="password" id="password" placeholder="Digite a senha">
+      label {
+        display: block;
+        margin-bottom: 8px;
+        color: #555;
+      }
 
-    <label for="title">Título</label>
-    <input type="text" name="title" id="title" placeholder="Digite o título">
+      input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 16px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
 
-    <label for="nome">Nome</label>
-    <input type="text" name="nome" id="nome" placeholder="Digite o nome">
+      button {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+      }
 
-    <label for="city">Cidade</label>
-    <input type="text" name="city" id="city" placeholder="Digite a cidade">
+      button:hover {
+        background-color: #0056b3;
+      }
 
-    <label for="unit">Unidade</label>
-    <input type="text" name="unit" id="unit" placeholder="Digite a unidade">
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+    </style>
+  </head>
 
-    <label for="is12Hour">Formato de 12 horas</label>
-    <input type="checkbox" name="is12Hour" id="is12Hour">
+  <body>
+    <div>
+      <h1>Formulário de Tarefas</h1>
+    </div>
 
-    <label for="hideSec">Ocultar segundos</label>
-    <input type="checkbox" name="hideSec" id="hideSec">
+    <div>
+      <form id="form-api">
+        <label for="userId">ID do Usuário</label>
+        <input
+          type="text"
+          name="userId"
+          id="userId"
+          placeholder="Digite o ID do usuário"
+        />
+        <label for="username">Nome de Usuário</label>
+        <input
+          type="text"
+          name="username"
+          id="username"
+          placeholder="Digite o nome de usuário"
+        />
+        <label for="password">Senha</label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          placeholder="Digite a senha"
+        />
+        <label for="title">Título</label>
+        <input
+          type="text"
+          name="title"
+          id="title"
+          placeholder="Digite o título"
+        />
+        <label for="nome">Nome</label>
+        <input type="text" name="nome" id="nome" placeholder="Digite o nome" />
+        <label for="city">Cidade</label>
+        <input
+          type="text"
+          name="city"
+          id="city"
+          placeholder="Digite a cidade"
+        />
+        <label for="unit">Unidade</label>
+        <input
+          type="text"
+          name="unit"
+          id="unit"
+          placeholder="Digite a unidade"
+        />
+        <label for="is12Hour">Formato de 12 horas</label>
+        <input type="checkbox" name="is12Hour" id="is12Hour" />
+        <label for="hideSec">Ocultar segundos</label>
+        <input type="checkbox" name="hideSec" id="hideSec" />
+        <label for="role">Função</label>
+        <input
+          type="text"
+          name="role"
+          id="role"
+          placeholder="Digite a função"
+        />
+        <button type="submit">Enviar</button>
+      </form>
+      <ul id="data-list">
+        <!-- Lista de dados -->
+      </ul>
+    </div>
 
-    <label for="role">Função</label>
-    <input type="text" name="role" id="role" placeholder="Digite a função">
+    <script>
+      const form = document.getElementById("form-api");
+      const dataList = document.getElementById("data-list");
 
-    <button type="submit">Enviar</button>
-  </form>
-
-  <ul id="data-list">
-    <!-- Lista de dados -->
-  </ul>
-
-  <script>
-    const form = document.getElementById('form-api');
-    const dataList = document.getElementById('data-list');
-
-    // Função para buscar dados do servidor e adicionar à lista
-    // Função para buscar dados do servidor e adicionar à lista
-    function fetchData() {
-      dataList.innerHTML = ''; // Limpar a lista existente
-      fetch('http://localhost:3000/users')
-        .then(response => response.json())
-        .then(data => {
-          data.forEach(item => {
-            const li = document.createElement('li');
-            const bt = document.createElement('button');
-            li.textContent = item.nome;
-            li.dataset.id = item.id; // Adicionar o ID do item como um atributo de dados
-            bt.textContent = 'Excluir';
-            bt.addEventListener('click', () => deleteData(li.dataset.id)); // Adicionar um ouvinte de evento ao botão
-            dataList.appendChild(li);
-            dataList.appendChild(bt);
+      // Função para buscar dados do servidor e adicionar à lista
+      // Função para buscar dados do servidor e adicionar à lista
+      function fetchData() {
+        dataList.innerHTML = ""; // Limpar a lista existente
+        fetch("http://localhost:3000/users")
+          .then((response) => response.json())
+          .then((data) => {
+            data.forEach((item) => {
+              const li = document.createElement("li");
+              const bt = document.createElement("button");
+              li.textContent = item.nome;
+              li.dataset.id = item.id; // Adicionar o ID do item como um atributo de dados
+              bt.textContent = "Excluir";
+              bt.addEventListener("click", () => deleteData(li.dataset.id)); // Adicionar um ouvinte de evento ao botão
+              dataList.appendChild(li);
+              dataList.appendChild(bt);
+            });
+          })
+          .catch((error) => {
+            console.error("Error:", error);
           });
+      }
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData);
+
+        // Enviar dados para o servidor
+        fetch("http://localhost:3000/users", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
         })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
-    }
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("Success:", data);
+            fetchData(); // Buscar dados novamente após a adição bem-sucedida
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      });
 
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      const formData = new FormData(e.target);
-      const data = Object.fromEntries(formData);
-
-      // Enviar dados para o servidor
-      fetch('http://localhost:3000/users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data),
-      })
-        .then(response => response.json())
-        .then(data => {
-          console.log('Success:', data);
-          fetchData(); // Buscar dados novamente após a adição bem-sucedida
+      // Função para excluir dados do servidor
+      function deleteData(id) {
+        fetch(`http://localhost:3000/users/${id}`, {
+          method: "DELETE",
         })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
-    });
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("Success:", data);
+            fetchData(); // Buscar dados novamente após a exclusão bem-sucedida
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
 
-    // Função para excluir dados do servidor
-    function deleteData(id) {
-      fetch(`http://localhost:3000/users/${id}`, {
-        method: 'DELETE',
-      })
-        .then(response => response.json())
-        .then(data => {
-          console.log('Success:', data);
-          fetchData(); // Buscar dados novamente após a exclusão bem-sucedida
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
-    }
-
-    // Buscar dados quando a página é carregada
-    fetchData();
-  </script>
-</body>
-
+      // Buscar dados quando a página é carregada
+      fetchData();
+    </script>
+  </body>
 </html>

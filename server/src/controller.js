@@ -60,11 +60,11 @@ class TaskController {
   }
 
   addUser(req, res) {
-    const { username, password, title, nome, city, unit, is12Hour, hideSec, created_at, role } = req.body;
-    if (!username || !password || !city) {
+    const { userId, username, password, title, nome, city, unit, is12Hour, hideSec, created_at, role } = req.body;
+    if (!userId || !username || !password || !city) {
       return res.status(400).json({ error: 'Invalid input' });
     }
-    this.taskModel.addUser(username, password, title, nome, city, unit, is12Hour, hideSec, created_at, role, (err, userId) => {
+    this.taskModel.addUser(userId, username, password, title, nome, city, unit, is12Hour, hideSec, created_at, role, (err, userId) => {
       if (err) {
         return res.status(500).json({ error: 'Internal Server Error' });
       }

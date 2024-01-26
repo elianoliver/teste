@@ -77,9 +77,9 @@ class TaskModel {
   }
 
   // ADD USER
-  addUser(username, password, title, nome, city, unit, is12Hour, hideSec, created_at, role, callback) {
-    const sql = 'INSERT INTO users (username, password, title, nome, city, unit, is12Hour, hideSec, created_at, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-    this.db.run(sql, [username, password, title, nome, city, unit, is12Hour, hideSec, created_at, role], (err) => {
+  addUser(userId ,username, password, title, nome, city, unit, is12Hour, hideSec, created_at, role, callback) {
+    const sql = 'INSERT INTO users (userId, username, password, title, nome, city, unit, is12Hour, hideSec, created_at, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    this.db.run(sql, [userId ,username, password, title, nome, city, unit, is12Hour, hideSec, created_at, role], (err) => {
       callback(err, this.lastID);
     });
   }

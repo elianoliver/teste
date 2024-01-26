@@ -1,11 +1,11 @@
 ### BUSCAR TODOS OS USUÁRIOS
-GET http://127.0.0.1:3000/tasks HTTP/1.1
+GET http://127.0.0.1:3000/users HTTP/1.1
 
 ### BUSCAR UM USUÁRIO
-GET http://127.0.0.1:3000/tasks/10 HTTP/1.1
+GET http://127.0.0.1:3000/users/1 HTTP/1.1
 
 ### 
-POST http://127.0.0.1:3000/tasks HTTP/1.1
+POST http://127.0.0.1:3000/users HTTP/1.1
 content-type: application/json
 
 {
@@ -16,7 +16,7 @@ content-type: application/json
 
 ###
 
-PATCH http://127.0.0.1:3000/item/1 HTTP/1.1
+PATCH http://127.0.0.1:3000/users/1 HTTP/1.1
 content-type: application/json
 
 {
@@ -27,4 +27,4 @@ content-type: application/json
 
 ###
 
-DELETE http://127.0.0.1:3000/item/2 HTTP/1.1
+DELETE http://127.0.0.1:3000/users/1 HTTP/1.1
