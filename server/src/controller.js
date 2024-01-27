@@ -24,16 +24,16 @@ class TaskController {
   }
 
   getUserById(req, res) {
-    const userId = req.params.id;
+    const userId = req.params.userId;
     if (!userId) {
       return res.status(400).json({ error: 'Invalid input' });
     }
-    this.taskModel.getUserskById(userId, (err, user) => {
+    this.taskModel.getUsersById(userId, (err, user) => {
       if (err) {
         return res.status(500).json({ error: 'Internal Server Error' });
       }
 
-      if (!user.userId) {
+      if (!user.userId) { // Altere esta linha
         return res.status(404).json({ error: 'User not found' });
       }
 

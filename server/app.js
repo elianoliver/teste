@@ -16,7 +16,7 @@ app.get('/users', (req, res) => {
   taskController.getAllUsers(req, res);
 });
 
-app.get('/users/:id', (req, res) => {
+app.get('/users/:userId', (req, res) => {
   taskController.getUserById(req, res);
 });
 

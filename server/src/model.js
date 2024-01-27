@@ -61,8 +61,8 @@ class TaskModel {
   }
 
   // GET USER BY ID
-  getUserskById(userId, callback) {
-    const sql = 'SELECT * FROM users WHERE id = ?';
+  getUsersById(userId, callback) {
+    const sql = 'SELECT * FROM users WHERE userId = ?';
     this.db.get(sql, [userId], (err, row) => {
       callback(err, row || {});
     });
