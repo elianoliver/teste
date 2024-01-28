@@ -9,22 +9,44 @@ POST http://127.0.0.1:3000/users HTTP/1.1
 content-type: application/json
 
 {
-  "nome": "Elian",
-  "email":  "elianoliveira234@gmail.com",
-  "senha": "123456"
+  "userId": 1,
+  "username": "elian",
+  "password": "12345",
+  "title": "titulo",
+  "nome": "alarme",
+  "city": "Balneário Camboriú",
+  "unit": "Celcius",
+  "is12Hour": true,
+  "hideSec": true,
+  "created_at": null,
+  "role": "estudante"
 }
 
-###
+### ATUALIZANDO TODO O USUARIO
+PUT http://127.0.0.1:3000/users/1 HTTP/1.1
+content-type: application/json
 
+{
+  "userId": "1",
+  "username": "novo_usuario",
+  "password": "nova_senha",
+  "title": "novo_titulo",
+  "nome": "novo_nome",
+  "city": "nova_cidade",
+  "unit": "C",
+  "is12Hour": false,
+  "hideSec": false,
+  "role": "novo_role"
+}
+
+### ATUALIZANDO APENAS ALGUNS ATRIBUTOS DO USUARIO
 PATCH http://127.0.0.1:3000/users/1 HTTP/1.1
 content-type: application/json
 
 {
-  "text": "ir para a escola de novo!",
-  "date": 123,
-  "not-permited-column": ""
+  "nome": "nome",
+  "password": "senha"
 }
-
 ###
 
 DELETE http://127.0.0.1:3000/users/1 HTTP/1.1

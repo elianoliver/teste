@@ -77,9 +77,9 @@ class TaskModel {
   }
 
   // ADD USER
-  addUser(userId ,username, password, title, nome, city, unit, is12Hour, hideSec, created_at, role, callback) {
+  addUser(userId, username, password, title, nome, city, unit, is12Hour, hideSec, created_at, role, callback) {
     const sql = 'INSERT INTO users (userId, username, password, title, nome, city, unit, is12Hour, hideSec, created_at, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-    this.db.run(sql, [userId ,username, password, title, nome, city, unit, is12Hour, hideSec, created_at, role], (err) => {
+    this.db.run(sql, [userId, username, password, title, nome, city, unit, is12Hour, hideSec, created_at, role], (err) => {
       callback(err, this.lastID);
     });
   }
@@ -104,14 +104,6 @@ class TaskModel {
   updateAlarm(description, userId, isActive, isRepeating, isSnoozeEnabled, ringtone, created_at, callback) {
     const sql = 'UPDATE alarms SET description = ?, userId = ?, isActive = ?, isRepeating = ?, isSnoozeEnabled = ?, ringtone = ?, created_at = ? WHERE id = ?';
     this.db.run(sql, [description, userId, isActive, isRepeating, isSnoozeEnabled, ringtone, created_at], function (err) {
-      callback(err, this.changes);
-    });
-  }
-
-  // UPDATE ALARM
-  updateAlarm(id, description, userId, isActive, isRepeating, isSnoozeEnabled, ringtone, created_at, callback) {
-    const sql = 'UPDATE alarms SET description = ?, userId = ?, isActive = ?, isRepeating = ?, isSnoozeEnabled = ?, ringtone = ?, created_at = ? WHERE id = ?';
-    this.db.run(sql, [description, userId, isActive, isRepeating, isSnoozeEnabled, ringtone, created_at, id], function (err) {
       callback(err, this.changes);
     });
   }

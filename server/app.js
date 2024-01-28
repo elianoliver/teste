@@ -24,7 +24,7 @@ app.post('/users', (req, res) => {
   taskController.addUser(req, res);
 });
 
-app.put('/users/:id', (req, res) => {
+app.put('/users/:userId', (req, res) => {
   taskController.updateUser(req, res);
 });
 
@@ -53,6 +53,7 @@ app.delete('/alarms/:id', (req, res) => {
   taskController.deleteAlarm(req, res);
 });
 
+// Rodar o servidor
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
